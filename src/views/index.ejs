@@ -11,14 +11,14 @@
     
     <%-  include ('api/nav') %>
 
-    <div class="container">
+    <div class="container mt-4">
         <div class="row">
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-body">
                         <form action="/add" method="POST">
                             <div class="form-group">
-                                <input name="Titulo" type="text" placeholder="input" class="form-control">
+                                <input name="Titulo" type="text" placeholder="Introducir nombre" class="form-control">
                                 <textarea name="Descripcion" id="" cols="30" rows="10" class="form-control mt-2 mb-2"></textarea>
                                 <button type="submit" class="btn btn-primary btn-block">Enviar</button>
                             </div>
@@ -32,17 +32,27 @@
                         <th>N°</th>
                         <th>Titulo</th>
                         <th>Descripcion</th>
-                        <th>estado</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </thead>
                     <tbody>
-                        <%- cosas %>
-                        <% for(var i = 0; i<JSON.stringify(cosas).lenght; i++){%>
-                            <%- i %>
+                        <!--<%- cosas %>-->
+                        <% for(var i=0; i < cosas.length; i++) { %>
                             <tr>
                                 <td><%- i+1 %></td>
-                                <td><%- cosas[i].Titulo %></td>
-                                <td><%- cosas[i].Descripcion %></td>
-                                <td><%- cosas[i].status %></td>
+                                <td><%= cosas[i].Titulo %></td>
+                                <td><%= cosas[i].Descripcion %></td>
+                                <td><% if(cosas[i].status == true){ %>
+                                    <a href="/changeSte/<%= cosas[i]._id %>" class="btn btn-success btn-block">true</a>
+                                <% }else{ %>
+                                    <a href="/changeSte/<%= cosas[i]._id %>" class="btn btn-danger btn-block">false</a>
+                                <% } %>
+                                </td>
+                                <td>
+                                    <a href="/add/<%= cosas[i]._id %>" class="btn btn-primary btn-block">Añadir al carrito</a>
+                                    <a href="/delete/<%= cosas[i]._id %>" class="btn btn-secondary btn-block">Eliminar</a>
+                                    <a href="/edit/<%= cosas[i]._id %>" class="btn btn-info btn-block">Editar</a>
+                                </td>
                             </tr>
                         <% } %>  
                     </tbody>

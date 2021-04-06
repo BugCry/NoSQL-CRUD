@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>CRUD | Node - Mongo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body class="bg-muted">
+    
+    <%-  include ('api/nav') %>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="mt-4 mb-4 card-title">Bienvenido a tu carrito</h5>
+                <img src="https://i.kym-cdn.com/photos/images/newsfeed/002/043/088/afe.jpg" id="DABABY" alt="" style="position: relative">
+            </div>
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <th>N°</th>
+                        <th>Nombre del Producto</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0; i < carrito.length; i++) { %>
+                            <tr>
+                                <td><%- i+1 %></td>
+                                <td><%= carrito[i].Nombre %></td>
+                                <td><%= carrito[i].Cantidad %></td>
+                                <td><%= carrito[i].Total %></td>
+                                <td>
+                                    <a href="/add/<%= carrito[i]._id %>" class="btn btn-primary btn-block">Añadir al carrito</a>
+                                    <a href="/deleteCart/<%= carrito[i]._id %>" class="btn btn-secondary btn-block">Eliminar</a>
+                                    <a href="/edit/<%= carrito[i]._id %>" class="btn btn-info btn-block">Editar</a>
+                                </td>
+                            </tr>
+                        <% } %>  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <%-  include ('api/footer') %>
+
+    <script>
+        $(function() {
+            
+            $("#DABABY").fadeIn('slow',function(){
+                $(this).animate({'right': '-=4444px'},'slow');
+            });$('#DABABY').fadeOut(44);
+
+            function toggleAdd(){
+                $('.add_pl').toggle();
+            }
+        })
+    </script>
+
+</body>
+</html>
